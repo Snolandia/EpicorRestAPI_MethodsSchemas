@@ -2618,7 +2618,7 @@ async def writeObjectToTypeScriptFile(fileName, odataObj,methodsObj):
             typescriptText += "   */  " + "\n"
             
             typescriptText += "export function " + method + "" + modKey + "(" + parameters + "epicorHeaders?:Headers){" + "\n"
-            print("odata method export function " + method + "" + modKey + "(" + parameters + "epicorHeaders?:Headers){")
+            # print("odata method export function " + method + "" + modKey + "(" + parameters + "epicorHeaders?:Headers){")
             
             # if(len(inputParams) > 0 or 
             if(len(inputParamsOptional) > 0 ):
@@ -2807,18 +2807,6 @@ async def writeObjectToTypeScriptFile(fileName, odataObj,methodsObj):
                         else:
                             typescriptText += " => content"
                 typescriptText += "\n"
-                
-                    # if(modKey == "_GetNextJobNum"):
-                    #     print(" GET NEXT JOB NUM ------------------------------------------------------------------------")
-                    #     print(" GET NEXT JOB NUM ------------------------------------------------------------------------")
-                    #     print(" GET NEXT JOB NUM ------------------------------------------------------------------------")
-                    #     print(" GET NEXT JOB NUM ------------------------------------------------------------------------")
-                    #     print(" GET NEXT JOB NUM ------------------------------------------------------------------------")
-                    #     print(" GET NEXT JOB NUM ------------------------------------------------------------------------")
-                    #     print(" GET NEXT JOB NUM ------------------------------------------------------------------------")
-                    #     print(" GET NEXT JOB NUM ------------------------------------------------------------------------")
-                    #     print(" GET NEXT JOB NUM ------------------------------------------------------------------------")
-                    #     print(" GET NEXT JOB NUM ------------------------------------------------------------------------")
             if("responses" in methodValue.keys()):
                 typescriptText += "   Returns: " + "\n"
                 for response, responseValue in methodValue["responses"].items():
@@ -2846,7 +2834,7 @@ async def writeObjectToTypeScriptFile(fileName, odataObj,methodsObj):
             typescriptText += "   */  " + "\n"
             
             typescriptText += "export function " + method + "" + modKey + "(" + parameters + "epicorHeaders?:Headers){" + "\n"
-            print("custom method export function " + method + "" + modKey + "(" + parameters + "epicorHeaders?:Headers){" )
+            # print("custom method export function " + method + "" + modKey + "(" + parameters + "epicorHeaders?:Headers){" )
             
             if(len(inputParams) > 0 or len(inputParamsOptional) > 0 ):
                 typescriptText += "   var firstParam = true" + "\n"  
@@ -2950,7 +2938,7 @@ async def writeObjectToTypeScriptFile(fileName, odataObj,methodsObj):
                 name = name.replace(".","_")
                 
             typescriptText += "export interface " + name + "{" + "\n"
-            print("odata schema export interface " + name + "{")
+            # print("odata schema export interface " + name + "{")
                         
             if("properties" in value):
                 for property, propertyValue in value["properties"].items():  
@@ -3035,7 +3023,7 @@ async def writeObjectToTypeScriptFile(fileName, odataObj,methodsObj):
                 typescriptText += "   */  "   + "\n"
                 
             typescriptText += "export interface " + name + "{" + "\n"
-            print("custom schema export interface " + name + ":")
+            # print("custom schema export interface " + name + ":")
             
             needsPass = True
             needsParams = False
@@ -3103,9 +3091,12 @@ async def writeObjectToTypeScriptFile(fileName, odataObj,methodsObj):
                                             elif (propertyValue["type"] == "array"):
                                                 typescriptText +=  ":any[]" + "\n"
                                             else:
-                                                typescriptText +=  ": UNKNOW TYPE(error 2269)," + "\n"
+                                                typescriptText +=  ":any // UNKNOW TYPE(error 2269)," + "\n"
+                                                print("Error at " + fileName + " -> " ": UNKNOW TYPE(error 2269), ---------------------------------------------------")
+                                                pprint.pprint(value)
                                         else:
-                                                typescriptText += " UNKOWN SOMETHING "  + "\n"
+                                                typescriptText += "// Error UNKOWN SOMETHING "  + "\n"
+                                                print("Error at " + fileName + " -> " ": UNKNOW SOMETHING(error 3069), ---------------------------------------------------")
                                 else:
                                     typescriptText += ":any,      //schema had no properties on an object."  + "\n"
                             else:
@@ -3182,9 +3173,13 @@ async def writeObjectToTypeScriptFile(fileName, odataObj,methodsObj):
                                         elif (pValue["type"] == "array"):
                                             typescriptText +=  ":any[]," + "\n"
                                         else:
-                                            typescriptText +=  ": UNKNOW TYPE(error 2338)," + "\n"
+                                            typescriptText +=  ":any // UNKNOW TYPE(error 2338)," + "\n"
+                                            print("Error at " + fileName + " -> " ": UNKNOW TYPE(error 2338),-------------------------------------------------")
+                                            pprint.pprint(value)
                                     else:
-                                            typescriptText += " UNKOWN SOMETHING(error 2340) "  + "\n"
+                                            typescriptText += "// UNKOWN SOMETHING(error 2340) "  + "\n"
+                                            print("Error at " + fileName + " -> " ": UNKNOW SOMETHING(error 2340),------------------------------------------------")
+                                            pprint.pprint(value)
                             else:
                                 typescriptText +=  ":" + propertyValue["type"] + "," + "\n"
                         elif("$ref" in propertyValue):
@@ -3198,7 +3193,9 @@ async def writeObjectToTypeScriptFile(fileName, odataObj,methodsObj):
                         typescriptText += "}" + "\n"
                         # typescriptText += "\n"
                     else:
-                        typescriptText +=  ":error = " + "error" + "\n"
+                        typescriptText +=  ":any // error = " + "error" + "\n"
+                        print("Error at " + fileName + " -> " ": ERROR ERROR),------------------------------------------------------")
+                        pprint.pprint(value)
                         
                     
                 # if(needsPass):
@@ -3259,22 +3256,22 @@ async def tsMain():
     i = 1    
 
     for svc in list:
-        print("##########")
-        print("##########")
-        print("##########")
+        # print("##########")
+        # print("##########")
+        # print("##########")
         print(" Adding schema " + str(i) + "/" + str(len(list)) + "    ->    " + svc[1].replace(".","_"))
         svcURL = svc[0]
         if("/index.html" in svcURL):
             svcURL = svcURL.replace("/index.html","")
         odataObj = await collectSchema(svcURL + ".json")
         methodsObj = await collectSchema(svcURL.replace("odata","methods") + ".json")
-        print("########################################################")
-        print("########################################################")
-        print("########################################################")
-        print("Service : " + svc[1])
-        print("########################################################")
-        print("########################################################")
-        print("########################################################")
+        # print("########################################################")
+        # print("########################################################")
+        # print("########################################################")
+        # print("Service : " + svc[1])
+        # print("########################################################")
+        # print("########################################################")
+        # print("########################################################")
         await writeObjectToTypeScriptFile(svc[1].replace(".","_"),odataObj,methodsObj)
         i+=1
         # if(i>20):

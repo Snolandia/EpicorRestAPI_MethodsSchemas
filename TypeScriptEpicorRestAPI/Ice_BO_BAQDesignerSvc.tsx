@@ -10807,7 +10807,7 @@ export interface ExportBaq_output{
    returnObj:string,
 parameters : {
       /**  output parameters  */  
-   options: UNKNOW TYPE(error 2338),
+   options:any // UNKNOW TYPE(error 2338),
    logResult:any[],
 }
 }
@@ -12755,7 +12755,7 @@ export interface ImportBaq_output{
    returnObj:boolean,
 parameters : {
       /**  output parameters  */  
-   options: UNKNOW TYPE(error 2338),
+   options:any // UNKNOW TYPE(error 2338),
    logResult:any[],
 }
 }

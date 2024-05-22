@@ -843,78 +843,6 @@ export function get_GetByID(taxCatID:string, epicorHeaders?:Headers){
 }
 
    /**  
-   Summary: Invoke method GetList
-   Description: Returns a list of rows that satisfy the where clause.
-   OperationID: Get_GetList
-      @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
-      @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
-      @param absolutePage Desc: Page of rows to return.   Required: True
-      @param epicorHeaders A string representing the epicor log in information to be used, 
-         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-   Returns: 
-      200 Desc: OK => reference#/components/schemas/GetList_output
-      500 Desc: Internal server error. Server is unable to process the request.
-   */  
-export function get_GetList(whereClause:string, pageSize:string, absolutePage:string, epicorHeaders?:Headers){
-   var firstParam = true
-   var params = ""
-   if(typeof whereClause!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "whereClause=" + whereClause
-   }
-   if(typeof pageSize!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "pageSize=" + pageSize
-   }
-   if(typeof absolutePage!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "absolutePage=" + absolutePage
-   }
-
-   var headers = configEpicorSchemas.epicorHeaders
-   if(typeof epicorHeaders !== 'undefined'){
-         headers = epicorHeaders
-   }
-
-   return (new Promise<GetList_output>((resolve, reject) => {
-      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaxCatSvc/GetList" + params, {
-          method: 'get',
-          headers: headers,
-      })
-      fetch(request)
-      .then((res) => {
-         if(res.ok){
-             return res.json()
-         }
-         else{
-             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
-         }
-      })
-      .then((data) => {
-         resolve(data as GetList_output)
-          })
-      .catch((error) => {
-          reject(error)
-      })
-   }))
-}
-
-   /**  
    Summary: Invoke method GetNewTaxCat
    Description: Inserts a new row in the DataSet with defaults populated.
    OperationID: GetNewTaxCat
@@ -1033,6 +961,78 @@ export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Hea
       })
       .then((data) => {
          resolve(data as DeleteByID_output)
+          })
+      .catch((error) => {
+          reject(error)
+      })
+   }))
+}
+
+   /**  
+   Summary: Invoke method GetList
+   Description: Returns a list of rows that satisfy the where clause.
+   OperationID: Get_GetList
+      @param whereClause Desc: An expression used to filter the rows. Can be left blank for all rows.   Required: True   Allow empty value : True
+      @param pageSize Desc: The maximum number of rows to return. Leave as zero for no maximum.   Required: True
+      @param absolutePage Desc: Page of rows to return.   Required: True
+      @param epicorHeaders A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+   Returns: 
+      200 Desc: OK => reference#/components/schemas/GetList_output
+      500 Desc: Internal server error. Server is unable to process the request.
+   */  
+export function get_GetList(whereClause:string, pageSize:string, absolutePage:string, epicorHeaders?:Headers){
+   var firstParam = true
+   var params = ""
+   if(typeof whereClause!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "whereClause=" + whereClause
+   }
+   if(typeof pageSize!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "pageSize=" + pageSize
+   }
+   if(typeof absolutePage!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "absolutePage=" + absolutePage
+   }
+
+   var headers = configEpicorSchemas.epicorHeaders
+   if(typeof epicorHeaders !== 'undefined'){
+         headers = epicorHeaders
+   }
+
+   return (new Promise<GetList_output>((resolve, reject) => {
+      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.TaxCatSvc/GetList" + params, {
+          method: 'get',
+          headers: headers,
+      })
+      fetch(request)
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
+      .then((data) => {
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)

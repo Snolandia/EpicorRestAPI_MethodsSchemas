@@ -741,180 +741,6 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 //////////////////////////////////////////////////////////////////////////
 
    /**  
-   Summary: Invoke method GetRows
-   Description: Returns a dataset containing all rows that satisfy the where clauses.
-   OperationID: Get_GetRows
-   Required: True   Allow empty value : True
-   Required: True   Allow empty value : True
-   Required: True
-   Required: True
-      @param epicorHeaders A string representing the epicor log in information to be used, 
-         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-   Returns: 
-      200 Desc: OK => reference#/components/schemas/GetRows_output
-      500 Desc: Internal server error. Server is unable to process the request.
-   */  
-export function get_GetRows(whereClauseUD02:string, whereClauseUD02Attch:string, pageSize:string, absolutePage:string, epicorHeaders?:Headers){
-   var firstParam = true
-   var params = ""
-   if(typeof whereClauseUD02!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "whereClauseUD02=" + whereClauseUD02
-   }
-   if(typeof whereClauseUD02Attch!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "whereClauseUD02Attch=" + whereClauseUD02Attch
-   }
-   if(typeof pageSize!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "pageSize=" + pageSize
-   }
-   if(typeof absolutePage!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "absolutePage=" + absolutePage
-   }
-
-   var headers = configEpicorSchemas.epicorHeaders
-   if(typeof epicorHeaders !== 'undefined'){
-         headers = epicorHeaders
-   }
-
-   return (new Promise<GetRows_output>((resolve, reject) => {
-      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.UD02Svc/GetRows" + params, {
-          method: 'get',
-          headers: headers,
-      })
-      fetch(request)
-      .then((res) => {
-         if(res.ok){
-             return res.json()
-         }
-         else{
-             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
-         }
-      })
-      .then((data) => {
-         resolve(data as GetRows_output)
-          })
-      .catch((error) => {
-          reject(error)
-      })
-   }))
-}
-
-   /**  
-   Summary: Invoke method GetByID
-   Description: Returns a DataSet given the primary key.
-   OperationID: Get_GetByID
-   Required: True   Allow empty value : True
-   Required: True   Allow empty value : True
-   Required: True   Allow empty value : True
-   Required: True   Allow empty value : True
-   Required: True   Allow empty value : True
-      @param epicorHeaders A string representing the epicor log in information to be used, 
-         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-   Returns: 
-      200 Desc: OK => reference#/components/schemas/GetByID_output
-      500 Desc: Internal server error. Server is unable to process the request.
-   */  
-export function get_GetByID(key1:string, key2:string, key3:string, key4:string, key5:string, epicorHeaders?:Headers){
-   var firstParam = true
-   var params = ""
-   if(typeof key1!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "key1=" + key1
-   }
-   if(typeof key2!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "key2=" + key2
-   }
-   if(typeof key3!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "key3=" + key3
-   }
-   if(typeof key4!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "key4=" + key4
-   }
-   if(typeof key5!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "key5=" + key5
-   }
-
-   var headers = configEpicorSchemas.epicorHeaders
-   if(typeof epicorHeaders !== 'undefined'){
-         headers = epicorHeaders
-   }
-
-   return (new Promise<GetByID_output>((resolve, reject) => {
-      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.UD02Svc/GetByID" + params, {
-          method: 'get',
-          headers: headers,
-      })
-      fetch(request)
-      .then((res) => {
-         if(res.ok){
-             return res.json()
-         }
-         else{
-             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
-         }
-      })
-      .then((data) => {
-         resolve(data as GetByID_output)
-          })
-      .catch((error) => {
-          reject(error)
-      })
-   }))
-}
-
-   /**  
    Summary: Invoke method GetList
    Description: Returns a list of rows that satisfy the where clause.
    OperationID: Get_GetList
@@ -1147,6 +973,180 @@ export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Hea
       })
       .then((data) => {
          resolve(data as DeleteByID_output)
+          })
+      .catch((error) => {
+          reject(error)
+      })
+   }))
+}
+
+   /**  
+   Summary: Invoke method GetByID
+   Description: Returns a DataSet given the primary key.
+   OperationID: Get_GetByID
+   Required: True   Allow empty value : True
+   Required: True   Allow empty value : True
+   Required: True   Allow empty value : True
+   Required: True   Allow empty value : True
+   Required: True   Allow empty value : True
+      @param epicorHeaders A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+   Returns: 
+      200 Desc: OK => reference#/components/schemas/GetByID_output
+      500 Desc: Internal server error. Server is unable to process the request.
+   */  
+export function get_GetByID(key1:string, key2:string, key3:string, key4:string, key5:string, epicorHeaders?:Headers){
+   var firstParam = true
+   var params = ""
+   if(typeof key1!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "key1=" + key1
+   }
+   if(typeof key2!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "key2=" + key2
+   }
+   if(typeof key3!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "key3=" + key3
+   }
+   if(typeof key4!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "key4=" + key4
+   }
+   if(typeof key5!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "key5=" + key5
+   }
+
+   var headers = configEpicorSchemas.epicorHeaders
+   if(typeof epicorHeaders !== 'undefined'){
+         headers = epicorHeaders
+   }
+
+   return (new Promise<GetByID_output>((resolve, reject) => {
+      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.UD02Svc/GetByID" + params, {
+          method: 'get',
+          headers: headers,
+      })
+      fetch(request)
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
+      .then((data) => {
+         resolve(data as GetByID_output)
+          })
+      .catch((error) => {
+          reject(error)
+      })
+   }))
+}
+
+   /**  
+   Summary: Invoke method GetRows
+   Description: Returns a dataset containing all rows that satisfy the where clauses.
+   OperationID: Get_GetRows
+   Required: True   Allow empty value : True
+   Required: True   Allow empty value : True
+   Required: True
+   Required: True
+      @param epicorHeaders A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+   Returns: 
+      200 Desc: OK => reference#/components/schemas/GetRows_output
+      500 Desc: Internal server error. Server is unable to process the request.
+   */  
+export function get_GetRows(whereClauseUD02:string, whereClauseUD02Attch:string, pageSize:string, absolutePage:string, epicorHeaders?:Headers){
+   var firstParam = true
+   var params = ""
+   if(typeof whereClauseUD02!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "whereClauseUD02=" + whereClauseUD02
+   }
+   if(typeof whereClauseUD02Attch!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "whereClauseUD02Attch=" + whereClauseUD02Attch
+   }
+   if(typeof pageSize!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "pageSize=" + pageSize
+   }
+   if(typeof absolutePage!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "absolutePage=" + absolutePage
+   }
+
+   var headers = configEpicorSchemas.epicorHeaders
+   if(typeof epicorHeaders !== 'undefined'){
+         headers = epicorHeaders
+   }
+
+   return (new Promise<GetRows_output>((resolve, reject) => {
+      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.UD02Svc/GetRows" + params, {
+          method: 'get',
+          headers: headers,
+      })
+      fetch(request)
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
+      .then((data) => {
+         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)

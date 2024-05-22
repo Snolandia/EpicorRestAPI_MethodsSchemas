@@ -4213,90 +4213,6 @@ export function post_GetByID(requestBody:GetByID_input, epicorHeaders?:Headers){
 }
 
    /**  
-   Summary: Invoke method GetQueryEmptyResultSetByID
-   Description: This method returns an empty result dataset. It is useful if client need information about result set schema only
-   OperationID: GetQueryEmptyResultSetByID
-      @param epicorHeaders A string representing the epicor log in information to be used, 
-         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetQueryEmptyResultSetByID_input
-   Returns: 
-      200 Desc: OK => reference#/components/schemas/GetQueryEmptyResultSetByID_output
-      500 Desc: Internal server error. Server is unable to process the request.
-   */  
-export function post_GetQueryEmptyResultSetByID(requestBody:GetQueryEmptyResultSetByID_input, epicorHeaders?:Headers){
-
-   var headers = configEpicorSchemas.epicorHeaders
-   if(typeof epicorHeaders !== 'undefined'){
-         headers = epicorHeaders
-   }
-
-   return (new Promise<GetQueryEmptyResultSetByID_output>((resolve, reject) => {
-      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/GetQueryEmptyResultSetByID", {
-          method: 'post',
-          headers: headers,
-          body: JSON.stringify(requestBody)
-      })
-      fetch(request)
-      .then((res) => {
-         if(res.ok){
-             return res.json()
-         }
-         else{
-             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
-         }
-      })
-      .then((data) => {
-         resolve(data as GetQueryEmptyResultSetByID_output)
-          })
-      .catch((error) => {
-          reject(error)
-      })
-   }))
-}
-
-   /**  
-   Summary: Invoke method GetQueryExecutionParametersByID
-   Description: This method returns a dataset representing an query's execution parameters information
-   OperationID: GetQueryExecutionParametersByID
-      @param epicorHeaders A string representing the epicor log in information to be used, 
-         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetQueryExecutionParametersByID_input
-   Returns: 
-      200 Desc: OK => reference#/components/schemas/GetQueryExecutionParametersByID_output
-      500 Desc: Internal server error. Server is unable to process the request.
-   */  
-export function post_GetQueryExecutionParametersByID(requestBody:GetQueryExecutionParametersByID_input, epicorHeaders?:Headers){
-
-   var headers = configEpicorSchemas.epicorHeaders
-   if(typeof epicorHeaders !== 'undefined'){
-         headers = epicorHeaders
-   }
-
-   return (new Promise<GetQueryExecutionParametersByID_output>((resolve, reject) => {
-      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/GetQueryExecutionParametersByID", {
-          method: 'post',
-          headers: headers,
-          body: JSON.stringify(requestBody)
-      })
-      fetch(request)
-      .then((res) => {
-         if(res.ok){
-             return res.json()
-         }
-         else{
-             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
-         }
-      })
-      .then((data) => {
-         resolve(data as GetQueryExecutionParametersByID_output)
-          })
-      .catch((error) => {
-          reject(error)
-      })
-   }))
-}
-
-   /**  
    Summary: Invoke method GetList
    Description: This method runs an updatable query and returns result dataset.
    OperationID: GetList
@@ -4677,6 +4593,48 @@ export function post_GetQueryExecutionParameters(requestBody:GetQueryExecutionPa
 }
 
    /**  
+   Summary: Invoke method GetQueryExecutionParametersByID
+   Description: This method returns a dataset representing an query's execution parameters information
+   OperationID: GetQueryExecutionParametersByID
+      @param epicorHeaders A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetQueryExecutionParametersByID_input
+   Returns: 
+      200 Desc: OK => reference#/components/schemas/GetQueryExecutionParametersByID_output
+      500 Desc: Internal server error. Server is unable to process the request.
+   */  
+export function post_GetQueryExecutionParametersByID(requestBody:GetQueryExecutionParametersByID_input, epicorHeaders?:Headers){
+
+   var headers = configEpicorSchemas.epicorHeaders
+   if(typeof epicorHeaders !== 'undefined'){
+         headers = epicorHeaders
+   }
+
+   return (new Promise<GetQueryExecutionParametersByID_output>((resolve, reject) => {
+      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/GetQueryExecutionParametersByID", {
+          method: 'post',
+          headers: headers,
+          body: JSON.stringify(requestBody)
+      })
+      fetch(request)
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
+      .then((data) => {
+         resolve(data as GetQueryExecutionParametersByID_output)
+          })
+      .catch((error) => {
+          reject(error)
+      })
+   }))
+}
+
+   /**  
    Summary: Invoke method GetQueryEmptyResultSet
    Description: This method returns an empty result dataset. It is useful if client need information about result set schema only
    OperationID: GetQueryEmptyResultSet
@@ -4711,6 +4669,48 @@ export function post_GetQueryEmptyResultSet(requestBody:GetQueryEmptyResultSet_i
       })
       .then((data) => {
          resolve(data as GetQueryEmptyResultSet_output)
+          })
+      .catch((error) => {
+          reject(error)
+      })
+   }))
+}
+
+   /**  
+   Summary: Invoke method GetQueryEmptyResultSetByID
+   Description: This method returns an empty result dataset. It is useful if client need information about result set schema only
+   OperationID: GetQueryEmptyResultSetByID
+      @param epicorHeaders A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+      @param requestBody Desc: Input parameters  => reference#/components/schemas/GetQueryEmptyResultSetByID_input
+   Returns: 
+      200 Desc: OK => reference#/components/schemas/GetQueryEmptyResultSetByID_output
+      500 Desc: Internal server error. Server is unable to process the request.
+   */  
+export function post_GetQueryEmptyResultSetByID(requestBody:GetQueryEmptyResultSetByID_input, epicorHeaders?:Headers){
+
+   var headers = configEpicorSchemas.epicorHeaders
+   if(typeof epicorHeaders !== 'undefined'){
+         headers = epicorHeaders
+   }
+
+   return (new Promise<GetQueryEmptyResultSetByID_output>((resolve, reject) => {
+      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Ice.BO.DynamicQuerySvc/GetQueryEmptyResultSetByID", {
+          method: 'post',
+          headers: headers,
+          body: JSON.stringify(requestBody)
+      })
+      fetch(request)
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
+      .then((data) => {
+         resolve(data as GetQueryEmptyResultSetByID_output)
           })
       .catch((error) => {
           reject(error)

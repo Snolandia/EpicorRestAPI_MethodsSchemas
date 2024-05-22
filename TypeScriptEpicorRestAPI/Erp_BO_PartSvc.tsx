@@ -7765,6 +7765,360 @@ export function get_List(select?:string, filter?:string, orderby?:string, top?:s
 //////////////////////////////////////////////////////////////////////////
 
    /**  
+   Summary: Invoke method GetRows
+   Description: Returns a dataset containing all rows that satisfy the where clauses.
+   OperationID: Get_GetRows
+   Required: True   Allow empty value : True
+   Required: True   Allow empty value : True
+   Required: True   Allow empty value : True
+   Required: True   Allow empty value : True
+   Required: True   Allow empty value : True
+   Required: True   Allow empty value : True
+   Required: True   Allow empty value : True
+   Required: True   Allow empty value : True
+   Required: True   Allow empty value : True
+   Required: True   Allow empty value : True
+   Required: True   Allow empty value : True
+   Required: True   Allow empty value : True
+   Required: True   Allow empty value : True
+   Required: True   Allow empty value : True
+   Required: True   Allow empty value : True
+   Required: True   Allow empty value : True
+   Required: True   Allow empty value : True
+   Required: True   Allow empty value : True
+   Required: True   Allow empty value : True
+   Required: True   Allow empty value : True
+   Required: True   Allow empty value : True
+   Required: True   Allow empty value : True
+   Required: True   Allow empty value : True
+   Required: True   Allow empty value : True
+   Required: True
+   Required: True
+      @param epicorHeaders A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+   Returns: 
+      200 Desc: OK => reference#/components/schemas/GetRows_output
+      500 Desc: Internal server error. Server is unable to process the request.
+   */  
+export function get_GetRows(whereClausePart:string, whereClausePartAttch:string, whereClausePartCOO:string, whereClausePartDim:string, whereClausePartLangDesc:string, whereClausePartPlanningPool:string, whereClausePartPlant:string, whereClausePartPlantPlanningAttribute:string, whereClausePartRestriction:string, whereClausePartRestrictSubst:string, whereClausePartRev:string, whereClausePartRevAttch:string, whereClausePartAudit:string, whereClausePartCOPart:string, whereClausePartRevInspPlan:string, whereClausePartRevInspPlanAttch:string, whereClausePartRevInspVend:string, whereClausePartSubs:string, whereClausePartPC:string, whereClausePartWhse:string, whereClausePartBinInfo:string, whereClausePartUOM:string, whereClauseEntityGLC:string, whereClauseTaxExempt:string, pageSize:string, absolutePage:string, epicorHeaders?:Headers){
+   var firstParam = true
+   var params = ""
+   if(typeof whereClausePart!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "whereClausePart=" + whereClausePart
+   }
+   if(typeof whereClausePartAttch!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "whereClausePartAttch=" + whereClausePartAttch
+   }
+   if(typeof whereClausePartCOO!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "whereClausePartCOO=" + whereClausePartCOO
+   }
+   if(typeof whereClausePartDim!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "whereClausePartDim=" + whereClausePartDim
+   }
+   if(typeof whereClausePartLangDesc!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "whereClausePartLangDesc=" + whereClausePartLangDesc
+   }
+   if(typeof whereClausePartPlanningPool!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "whereClausePartPlanningPool=" + whereClausePartPlanningPool
+   }
+   if(typeof whereClausePartPlant!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "whereClausePartPlant=" + whereClausePartPlant
+   }
+   if(typeof whereClausePartPlantPlanningAttribute!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "whereClausePartPlantPlanningAttribute=" + whereClausePartPlantPlanningAttribute
+   }
+   if(typeof whereClausePartRestriction!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "whereClausePartRestriction=" + whereClausePartRestriction
+   }
+   if(typeof whereClausePartRestrictSubst!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "whereClausePartRestrictSubst=" + whereClausePartRestrictSubst
+   }
+   if(typeof whereClausePartRev!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "whereClausePartRev=" + whereClausePartRev
+   }
+   if(typeof whereClausePartRevAttch!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "whereClausePartRevAttch=" + whereClausePartRevAttch
+   }
+   if(typeof whereClausePartAudit!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "whereClausePartAudit=" + whereClausePartAudit
+   }
+   if(typeof whereClausePartCOPart!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "whereClausePartCOPart=" + whereClausePartCOPart
+   }
+   if(typeof whereClausePartRevInspPlan!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "whereClausePartRevInspPlan=" + whereClausePartRevInspPlan
+   }
+   if(typeof whereClausePartRevInspPlanAttch!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "whereClausePartRevInspPlanAttch=" + whereClausePartRevInspPlanAttch
+   }
+   if(typeof whereClausePartRevInspVend!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "whereClausePartRevInspVend=" + whereClausePartRevInspVend
+   }
+   if(typeof whereClausePartSubs!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "whereClausePartSubs=" + whereClausePartSubs
+   }
+   if(typeof whereClausePartPC!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "whereClausePartPC=" + whereClausePartPC
+   }
+   if(typeof whereClausePartWhse!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "whereClausePartWhse=" + whereClausePartWhse
+   }
+   if(typeof whereClausePartBinInfo!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "whereClausePartBinInfo=" + whereClausePartBinInfo
+   }
+   if(typeof whereClausePartUOM!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "whereClausePartUOM=" + whereClausePartUOM
+   }
+   if(typeof whereClauseEntityGLC!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "whereClauseEntityGLC=" + whereClauseEntityGLC
+   }
+   if(typeof whereClauseTaxExempt!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "whereClauseTaxExempt=" + whereClauseTaxExempt
+   }
+   if(typeof pageSize!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "pageSize=" + pageSize
+   }
+   if(typeof absolutePage!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "absolutePage=" + absolutePage
+   }
+
+   var headers = configEpicorSchemas.epicorHeaders
+   if(typeof epicorHeaders !== 'undefined'){
+         headers = epicorHeaders
+   }
+
+   return (new Promise<GetRows_output>((resolve, reject) => {
+      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSvc/GetRows" + params, {
+          method: 'get',
+          headers: headers,
+      })
+      fetch(request)
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
+      .then((data) => {
+         resolve(data as GetRows_output)
+          })
+      .catch((error) => {
+          reject(error)
+      })
+   }))
+}
+
+   /**  
+   Summary: Invoke method GetByID
+   Description: Returns a DataSet given the primary key.
+   OperationID: Get_GetByID
+   Required: True   Allow empty value : True
+      @param epicorHeaders A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+   Returns: 
+      200 Desc: OK => reference#/components/schemas/GetByID_output
+      500 Desc: Internal server error. Server is unable to process the request.
+   */  
+export function get_GetByID(partNum:string, epicorHeaders?:Headers){
+   var firstParam = true
+   var params = ""
+   if(typeof partNum!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "partNum=" + partNum
+   }
+
+   var headers = configEpicorSchemas.epicorHeaders
+   if(typeof epicorHeaders !== 'undefined'){
+         headers = epicorHeaders
+   }
+
+   return (new Promise<GetByID_output>((resolve, reject) => {
+      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSvc/GetByID" + params, {
+          method: 'get',
+          headers: headers,
+      })
+      fetch(request)
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
+      .then((data) => {
+         resolve(data as GetByID_output)
+          })
+      .catch((error) => {
+          reject(error)
+      })
+   }))
+}
+
+   /**  
    Summary: Invoke method GetList
    Description: Returns a list of rows that satisfy the where clause.
    OperationID: Get_GetList
@@ -9711,360 +10065,6 @@ export function post_DeleteByID(requestBody:DeleteByID_input, epicorHeaders?:Hea
       })
       .then((data) => {
          resolve(data as DeleteByID_output)
-          })
-      .catch((error) => {
-          reject(error)
-      })
-   }))
-}
-
-   /**  
-   Summary: Invoke method GetByID
-   Description: Returns a DataSet given the primary key.
-   OperationID: Get_GetByID
-   Required: True   Allow empty value : True
-      @param epicorHeaders A string representing the epicor log in information to be used, 
-         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-   Returns: 
-      200 Desc: OK => reference#/components/schemas/GetByID_output
-      500 Desc: Internal server error. Server is unable to process the request.
-   */  
-export function get_GetByID(partNum:string, epicorHeaders?:Headers){
-   var firstParam = true
-   var params = ""
-   if(typeof partNum!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "partNum=" + partNum
-   }
-
-   var headers = configEpicorSchemas.epicorHeaders
-   if(typeof epicorHeaders !== 'undefined'){
-         headers = epicorHeaders
-   }
-
-   return (new Promise<GetByID_output>((resolve, reject) => {
-      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSvc/GetByID" + params, {
-          method: 'get',
-          headers: headers,
-      })
-      fetch(request)
-      .then((res) => {
-         if(res.ok){
-             return res.json()
-         }
-         else{
-             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
-         }
-      })
-      .then((data) => {
-         resolve(data as GetByID_output)
-          })
-      .catch((error) => {
-          reject(error)
-      })
-   }))
-}
-
-   /**  
-   Summary: Invoke method GetRows
-   Description: Returns a dataset containing all rows that satisfy the where clauses.
-   OperationID: Get_GetRows
-   Required: True   Allow empty value : True
-   Required: True   Allow empty value : True
-   Required: True   Allow empty value : True
-   Required: True   Allow empty value : True
-   Required: True   Allow empty value : True
-   Required: True   Allow empty value : True
-   Required: True   Allow empty value : True
-   Required: True   Allow empty value : True
-   Required: True   Allow empty value : True
-   Required: True   Allow empty value : True
-   Required: True   Allow empty value : True
-   Required: True   Allow empty value : True
-   Required: True   Allow empty value : True
-   Required: True   Allow empty value : True
-   Required: True   Allow empty value : True
-   Required: True   Allow empty value : True
-   Required: True   Allow empty value : True
-   Required: True   Allow empty value : True
-   Required: True   Allow empty value : True
-   Required: True   Allow empty value : True
-   Required: True   Allow empty value : True
-   Required: True   Allow empty value : True
-   Required: True   Allow empty value : True
-   Required: True   Allow empty value : True
-   Required: True
-   Required: True
-      @param epicorHeaders A string representing the epicor log in information to be used, 
-         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-   Returns: 
-      200 Desc: OK => reference#/components/schemas/GetRows_output
-      500 Desc: Internal server error. Server is unable to process the request.
-   */  
-export function get_GetRows(whereClausePart:string, whereClausePartAttch:string, whereClausePartCOO:string, whereClausePartDim:string, whereClausePartLangDesc:string, whereClausePartPlanningPool:string, whereClausePartPlant:string, whereClausePartPlantPlanningAttribute:string, whereClausePartRestriction:string, whereClausePartRestrictSubst:string, whereClausePartRev:string, whereClausePartRevAttch:string, whereClausePartAudit:string, whereClausePartCOPart:string, whereClausePartRevInspPlan:string, whereClausePartRevInspPlanAttch:string, whereClausePartRevInspVend:string, whereClausePartSubs:string, whereClausePartPC:string, whereClausePartWhse:string, whereClausePartBinInfo:string, whereClausePartUOM:string, whereClauseEntityGLC:string, whereClauseTaxExempt:string, pageSize:string, absolutePage:string, epicorHeaders?:Headers){
-   var firstParam = true
-   var params = ""
-   if(typeof whereClausePart!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "whereClausePart=" + whereClausePart
-   }
-   if(typeof whereClausePartAttch!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "whereClausePartAttch=" + whereClausePartAttch
-   }
-   if(typeof whereClausePartCOO!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "whereClausePartCOO=" + whereClausePartCOO
-   }
-   if(typeof whereClausePartDim!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "whereClausePartDim=" + whereClausePartDim
-   }
-   if(typeof whereClausePartLangDesc!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "whereClausePartLangDesc=" + whereClausePartLangDesc
-   }
-   if(typeof whereClausePartPlanningPool!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "whereClausePartPlanningPool=" + whereClausePartPlanningPool
-   }
-   if(typeof whereClausePartPlant!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "whereClausePartPlant=" + whereClausePartPlant
-   }
-   if(typeof whereClausePartPlantPlanningAttribute!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "whereClausePartPlantPlanningAttribute=" + whereClausePartPlantPlanningAttribute
-   }
-   if(typeof whereClausePartRestriction!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "whereClausePartRestriction=" + whereClausePartRestriction
-   }
-   if(typeof whereClausePartRestrictSubst!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "whereClausePartRestrictSubst=" + whereClausePartRestrictSubst
-   }
-   if(typeof whereClausePartRev!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "whereClausePartRev=" + whereClausePartRev
-   }
-   if(typeof whereClausePartRevAttch!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "whereClausePartRevAttch=" + whereClausePartRevAttch
-   }
-   if(typeof whereClausePartAudit!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "whereClausePartAudit=" + whereClausePartAudit
-   }
-   if(typeof whereClausePartCOPart!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "whereClausePartCOPart=" + whereClausePartCOPart
-   }
-   if(typeof whereClausePartRevInspPlan!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "whereClausePartRevInspPlan=" + whereClausePartRevInspPlan
-   }
-   if(typeof whereClausePartRevInspPlanAttch!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "whereClausePartRevInspPlanAttch=" + whereClausePartRevInspPlanAttch
-   }
-   if(typeof whereClausePartRevInspVend!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "whereClausePartRevInspVend=" + whereClausePartRevInspVend
-   }
-   if(typeof whereClausePartSubs!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "whereClausePartSubs=" + whereClausePartSubs
-   }
-   if(typeof whereClausePartPC!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "whereClausePartPC=" + whereClausePartPC
-   }
-   if(typeof whereClausePartWhse!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "whereClausePartWhse=" + whereClausePartWhse
-   }
-   if(typeof whereClausePartBinInfo!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "whereClausePartBinInfo=" + whereClausePartBinInfo
-   }
-   if(typeof whereClausePartUOM!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "whereClausePartUOM=" + whereClausePartUOM
-   }
-   if(typeof whereClauseEntityGLC!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "whereClauseEntityGLC=" + whereClauseEntityGLC
-   }
-   if(typeof whereClauseTaxExempt!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "whereClauseTaxExempt=" + whereClauseTaxExempt
-   }
-   if(typeof pageSize!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "pageSize=" + pageSize
-   }
-   if(typeof absolutePage!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "absolutePage=" + absolutePage
-   }
-
-   var headers = configEpicorSchemas.epicorHeaders
-   if(typeof epicorHeaders !== 'undefined'){
-         headers = epicorHeaders
-   }
-
-   return (new Promise<GetRows_output>((resolve, reject) => {
-      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.PartSvc/GetRows" + params, {
-          method: 'get',
-          headers: headers,
-      })
-      fetch(request)
-      .then((res) => {
-         if(res.ok){
-             return res.json()
-         }
-         else{
-             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
-         }
-      })
-      .then((data) => {
-         resolve(data as GetRows_output)
           })
       .catch((error) => {
           reject(error)

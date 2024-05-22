@@ -6576,6 +6576,48 @@ export interface Erp_Tablesets_GLJrnDtlMnlDEASchRow{
 }
 
 export interface Erp_Tablesets_GLJrnDtlMnlRow{
+      /**  Full GL account containing the controlled segment valid combinations up to 200 characters including the internal segment separator.  This is the unique identifier for the GL Account and is stored in physical segment number sequence with the vertical bar as its separator.  This field is not intended for end user display.  It is used internally as a unique identifier.  The display format GL Account is found in table GLAcctDisp.  */  
+   "GLAccount":string,
+      /**  SegmentValue 1.  See COASegment segment number 1 for a description of this field.  */  
+   "SegValue1":string,
+      /**  SegmentValue 2.  See COASegment segment number 2 for a description of this field.  */  
+   "SegValue2":string,
+      /**  SegmentValue 3.  See COASegment segment number 3 for a description of this field.  */  
+   "SegValue3":string,
+      /**  SegmentValue 4.  See COASegment segment number 4 for a description of this field.  */  
+   "SegValue4":string,
+      /**  SegmentValue 5.  See COASegment segment number 5 for a description of this field.  */  
+   "SegValue5":string,
+      /**  SegmentValue 6.  See COASegment segment number 6 for a description of this field.  */  
+   "SegValue6":string,
+      /**  SegmentValue 7.  See COASegment segment number 7 for a description of this field.  */  
+   "SegValue7":string,
+      /**  SegmentValue 8.  See COASegment segment number 8 for a description of this field.  */  
+   "SegValue8":string,
+      /**  SegmentValue 9.  See COASegment segment number 9 for a description of this field.  */  
+   "SegValue9":string,
+      /**  SegmentValue 10.  See COASegment segment number 10 for a description of this field.  */  
+   "SegValue10":string,
+      /**  SegmentValue 11.  See COASegment segment number 11 for a description of this field.  */  
+   "SegValue11":string,
+      /**  SegmentValue 12.  See COASegment segment number 12 for a description of this field.  */  
+   "SegValue12":string,
+      /**  SegmentValue 13.  See COASegment segment number 13 for a description of this field.  */  
+   "SegValue13":string,
+      /**  SegmentValue 14.  See COASegment segment number 14 for a description of this field.  */  
+   "SegValue14":string,
+      /**  SegmentValue 15.  See COASegment segment number 15 for a description of this field.  */  
+   "SegValue15":string,
+      /**  SegmentValue 16.  See COASegment segment number 16 for a description of this field.  */  
+   "SegValue16":string,
+      /**  SegmentValue 17.  See COASegment segment number 17 for a description of this field.  */  
+   "SegValue17":string,
+      /**  SegmentValue 18.  See COASegment segment number 18 for a description of this field.  */  
+   "SegValue18":string,
+      /**  SegmentValue 19.  See COASegment segment number 19 for a description of this field.  */  
+   "SegValue19":string,
+      /**  SegmentValue 20.  See COASegment segment number 20 for a description of this field.  */  
+   "SegValue20":string,
       /**  Company Identifier.  */  
    "Company":string,
       /**  Fiscal year that entry applies to.  */  
@@ -6664,48 +6706,6 @@ Pertains to transactions related to a bank (checks, receipts, transfers, adjustm
    "GlbFiscalPeriod":number,
       /**  The data entry Group from the external company that the journal entry is assigned to.  */  
    "GlbGroupID":string,
-      /**  Full GL account containing the controlled segment valid combinations up to 200 characters including the internal segment separator.  This is the unique identifier for the GL Account and is stored in physical segment number sequence with the vertical bar as its separator.  This field is not intended for end user display.  It is used internally as a unique identifier.  The display format GL Account is found in table GLAcctDisp.  */  
-   "GLAccount":string,
-      /**  SegmentValue 1.  See COASegment segment number 1 for a description of this field.  */  
-   "SegValue1":string,
-      /**  SegmentValue 2.  See COASegment segment number 2 for a description of this field.  */  
-   "SegValue2":string,
-      /**  SegmentValue 3.  See COASegment segment number 3 for a description of this field.  */  
-   "SegValue3":string,
-      /**  SegmentValue 4.  See COASegment segment number 4 for a description of this field.  */  
-   "SegValue4":string,
-      /**  SegmentValue 5.  See COASegment segment number 5 for a description of this field.  */  
-   "SegValue5":string,
-      /**  SegmentValue 6.  See COASegment segment number 6 for a description of this field.  */  
-   "SegValue6":string,
-      /**  SegmentValue 7.  See COASegment segment number 7 for a description of this field.  */  
-   "SegValue7":string,
-      /**  SegmentValue 8.  See COASegment segment number 8 for a description of this field.  */  
-   "SegValue8":string,
-      /**  SegmentValue 9.  See COASegment segment number 9 for a description of this field.  */  
-   "SegValue9":string,
-      /**  SegmentValue 10.  See COASegment segment number 10 for a description of this field.  */  
-   "SegValue10":string,
-      /**  SegmentValue 11.  See COASegment segment number 11 for a description of this field.  */  
-   "SegValue11":string,
-      /**  SegmentValue 12.  See COASegment segment number 12 for a description of this field.  */  
-   "SegValue12":string,
-      /**  SegmentValue 13.  See COASegment segment number 13 for a description of this field.  */  
-   "SegValue13":string,
-      /**  SegmentValue 14.  See COASegment segment number 14 for a description of this field.  */  
-   "SegValue14":string,
-      /**  SegmentValue 15.  See COASegment segment number 15 for a description of this field.  */  
-   "SegValue15":string,
-      /**  SegmentValue 16.  See COASegment segment number 16 for a description of this field.  */  
-   "SegValue16":string,
-      /**  SegmentValue 17.  See COASegment segment number 17 for a description of this field.  */  
-   "SegValue17":string,
-      /**  SegmentValue 18.  See COASegment segment number 18 for a description of this field.  */  
-   "SegValue18":string,
-      /**  SegmentValue 19.  See COASegment segment number 19 for a description of this field.  */  
-   "SegValue19":string,
-      /**  SegmentValue 20.  See COASegment segment number 20 for a description of this field.  */  
-   "SegValue20":string,
       /**  External Segment Value 1  */  
    "ExtSegValue1":string,
       /**  External Segment Value 2  */  

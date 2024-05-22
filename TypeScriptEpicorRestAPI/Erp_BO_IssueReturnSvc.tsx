@@ -263,45 +263,6 @@ export function get_GetRows(whereClauseJobHead:string, whereClauseJobAsmbl:strin
 }
 
    /**  
-   Summary: Invoke method _History07_08
-   OperationID: _History07_08
-      @param epicorHeaders A string representing the epicor log in information to be used, 
-         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-   Returns: 
-      200 Desc: OK => reference#/components/schemas/_History07_08_output
-      500 Desc: Internal server error. Server is unable to process the request.
-   */  
-export function post_History07_08(epicorHeaders?:Headers){
-
-   var headers = configEpicorSchemas.epicorHeaders
-   if(typeof epicorHeaders !== 'undefined'){
-         headers = epicorHeaders
-   }
-
-   return (new Promise<_History07_08_output>((resolve, reject) => {
-      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.IssueReturnSvc/_History07_08", {
-          method: 'post',
-          headers: headers,
-      })
-      fetch(request)
-      .then((res) => {
-         if(res.ok){
-             return res.json()
-         }
-         else{
-             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
-         }
-      })
-      .then((data) => {
-         resolve(data as _History07_08_output)
-          })
-      .catch((error) => {
-          reject(error)
-      })
-   }))
-}
-
-   /**  
    Summary: Invoke method GetList
    Description: List of jobs that can be selected for Mass Issue.
    OperationID: Get_GetList
@@ -376,6 +337,45 @@ export function get_GetList(whereClauseJobHead:string, whereClauseJobAsmbl:strin
       })
       .then((data) => {
          resolve(data as GetList_output)
+          })
+      .catch((error) => {
+          reject(error)
+      })
+   }))
+}
+
+   /**  
+   Summary: Invoke method _History07_08
+   OperationID: _History07_08
+      @param epicorHeaders A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+   Returns: 
+      200 Desc: OK => reference#/components/schemas/_History07_08_output
+      500 Desc: Internal server error. Server is unable to process the request.
+   */  
+export function post_History07_08(epicorHeaders?:Headers){
+
+   var headers = configEpicorSchemas.epicorHeaders
+   if(typeof epicorHeaders !== 'undefined'){
+         headers = epicorHeaders
+   }
+
+   return (new Promise<_History07_08_output>((resolve, reject) => {
+      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.IssueReturnSvc/_History07_08", {
+          method: 'post',
+          headers: headers,
+      })
+      fetch(request)
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
+      .then((data) => {
+         resolve(data as _History07_08_output)
           })
       .catch((error) => {
           reject(error)

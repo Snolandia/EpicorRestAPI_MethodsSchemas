@@ -3800,7 +3800,7 @@ export interface DocStarDownloadFile_output{
    returnObj:string,
 parameters : {
       /**  output parameters  */  
-   metadata: UNKNOW TYPE(error 2338),
+   metadata:any // UNKNOW TYPE(error 2338),
 }
 }
 
@@ -3819,7 +3819,7 @@ export interface DocStarDownloadNonERPFile_output{
    returnObj:string,
 parameters : {
       /**  output parameters  */  
-   metadata: UNKNOW TYPE(error 2338),
+   metadata:any // UNKNOW TYPE(error 2338),
 }
 }
 
@@ -3861,7 +3861,7 @@ export interface DocStarGetMetadata_input{
 export interface DocStarGetMetadata_output{
 parameters : {
       /**  output parameters  */  
-   metadata: UNKNOW TYPE(error 2338),
+   metadata:any // UNKNOW TYPE(error 2338),
 }
 }
 
@@ -3995,7 +3995,7 @@ export interface DownloadFileFromDocumentStorage_output{
    returnObj:string,
 parameters : {
       /**  output parameters  */  
-   metadata: UNKNOW TYPE(error 2338),
+   metadata:any // UNKNOW TYPE(error 2338),
 }
 }
 
@@ -4027,7 +4027,7 @@ export interface DownloadNonERPFileFromDocumentStorage_output{
    returnObj:string,
 parameters : {
       /**  output parameters  */  
-   metadata: UNKNOW TYPE(error 2338),
+   metadata:any // UNKNOW TYPE(error 2338),
 }
 }
 
@@ -4185,7 +4185,7 @@ export interface GetFileMetaDataFromDocumentStorage_input{
 export interface GetFileMetaDataFromDocumentStorage_output{
 parameters : {
       /**  output parameters  */  
-   metaData: UNKNOW TYPE(error 2338),
+   metaData:any // UNKNOW TYPE(error 2338),
 }
 }
 
@@ -4687,7 +4687,7 @@ export interface SpGetMetadata_input{
 export interface SpGetMetadata_output{
 parameters : {
       /**  output parameters  */  
-   metadata: UNKNOW TYPE(error 2338),
+   metadata:any // UNKNOW TYPE(error 2338),
 }
 }
 

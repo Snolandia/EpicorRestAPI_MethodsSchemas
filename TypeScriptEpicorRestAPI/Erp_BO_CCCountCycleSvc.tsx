@@ -3678,6 +3678,8 @@ export interface Erp_Tablesets_CCCountCycleTableset{
 }
 
 export interface Erp_Tablesets_CCDtlRow{
+      /**  Revision identifier for this row. It is incremented upon each write.  */  
+   SysRevID:number,
       /**  Company Identifier.  */  
    Company:string,
       /**  Unique identifier for this warehouse assigned by the user.  */  
@@ -3761,8 +3763,6 @@ Code/Desc:
    TotActivityBeforeCount:number,
       /**  Total ActivityBeforeValue for related CCTag records. Updated at the time the counts are posted..  */  
    TotActivityBeforeVal:number,
-      /**  Revision identifier for this row. It is incremented upon each write.  */  
-   SysRevID:number,
       /**  Unique identifier for this row. The value is a GUID.  */  
    SysRowID:string,
       /**  True indicates this part was added to the physical Inventory cycle during count entry using a blank tag. Counts and inventory adjustments for the part will be made based only on the blank tags entered for the part, regardless of what other bins/lots/serial numbers, etc may exist for the part in the warehouse at the time of posting the counts for the part. This is only possible for a physical inventory count.  */  

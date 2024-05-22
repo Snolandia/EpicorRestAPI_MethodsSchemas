@@ -259,88 +259,6 @@ export function get_GetRows(whereClauseJobHead:string, whereClauseJobAsmbl:strin
 }
 
    /**  
-   Summary: Invoke method GetList
-   Description: List of jobs that can be selected for Mass Issue.
-   OperationID: Get_GetList
-      @param whereClauseJobHead Desc: Where condition without the where word   Required: True   Allow empty value : True
-      @param whereClauseJobAsmbl Desc: Where condition without the where word   Required: True   Allow empty value : True
-      @param pageSize Desc: # of records returned.  0 means all   Required: True
-   Required: True
-      @param epicorHeaders A string representing the epicor log in information to be used, 
-         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
-   Returns: 
-      200 Desc: OK => reference#/components/schemas/GetList_output
-      500 Desc: Internal server error. Server is unable to process the request.
-   */  
-export function get_GetList(whereClauseJobHead:string, whereClauseJobAsmbl:string, pageSize:string, absolutePage:string, epicorHeaders?:Headers){
-   var firstParam = true
-   var params = ""
-   if(typeof whereClauseJobHead!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "whereClauseJobHead=" + whereClauseJobHead
-   }
-   if(typeof whereClauseJobAsmbl!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "whereClauseJobAsmbl=" + whereClauseJobAsmbl
-   }
-   if(typeof pageSize!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "pageSize=" + pageSize
-   }
-   if(typeof absolutePage!== 'undefined'){
-      if(firstParam){
-         params += "?"
-         firstParam = false
-      }else{
-         params += "&"
-      }
-      params += "absolutePage=" + absolutePage
-   }
-
-   var headers = configEpicorSchemas.epicorHeaders
-   if(typeof epicorHeaders !== 'undefined'){
-         headers = epicorHeaders
-   }
-
-   return (new Promise<GetList_output>((resolve, reject) => {
-      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReceiptsFromMfgSvc/GetList" + params, {
-          method: 'get',
-          headers: headers,
-      })
-      fetch(request)
-      .then((res) => {
-         if(res.ok){
-             return res.json()
-         }
-         else{
-             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
-         }
-      })
-      .then((data) => {
-         resolve(data as GetList_output)
-          })
-      .catch((error) => {
-          reject(error)
-      })
-   }))
-}
-
-   /**  
    Summary: Invoke method CheckPackageCodeAllocNegQty
    Description: Check Package Code Allocated negative quantity.
    OperationID: CheckPackageCodeAllocNegQty
@@ -967,6 +885,88 @@ export function post_ValidatePCID(requestBody:ValidatePCID_input, epicorHeaders?
       })
       .then((data) => {
          resolve(data as ValidatePCID_output)
+          })
+      .catch((error) => {
+          reject(error)
+      })
+   }))
+}
+
+   /**  
+   Summary: Invoke method GetList
+   Description: List of jobs that can be selected for Mass Issue.
+   OperationID: Get_GetList
+      @param whereClauseJobHead Desc: Where condition without the where word   Required: True   Allow empty value : True
+      @param whereClauseJobAsmbl Desc: Where condition without the where word   Required: True   Allow empty value : True
+      @param pageSize Desc: # of records returned.  0 means all   Required: True
+   Required: True
+      @param epicorHeaders A string representing the epicor log in information to be used, 
+         already converted to base64 in the format username:password, defaults to the configEpicorSchemas creds
+   Returns: 
+      200 Desc: OK => reference#/components/schemas/GetList_output
+      500 Desc: Internal server error. Server is unable to process the request.
+   */  
+export function get_GetList(whereClauseJobHead:string, whereClauseJobAsmbl:string, pageSize:string, absolutePage:string, epicorHeaders?:Headers){
+   var firstParam = true
+   var params = ""
+   if(typeof whereClauseJobHead!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "whereClauseJobHead=" + whereClauseJobHead
+   }
+   if(typeof whereClauseJobAsmbl!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "whereClauseJobAsmbl=" + whereClauseJobAsmbl
+   }
+   if(typeof pageSize!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "pageSize=" + pageSize
+   }
+   if(typeof absolutePage!== 'undefined'){
+      if(firstParam){
+         params += "?"
+         firstParam = false
+      }else{
+         params += "&"
+      }
+      params += "absolutePage=" + absolutePage
+   }
+
+   var headers = configEpicorSchemas.epicorHeaders
+   if(typeof epicorHeaders !== 'undefined'){
+         headers = epicorHeaders
+   }
+
+   return (new Promise<GetList_output>((resolve, reject) => {
+      const request: RequestInfo = new Request(configEpicorSchemas.epicorURL + "Erp.BO.ReceiptsFromMfgSvc/GetList" + params, {
+          method: 'get',
+          headers: headers,
+      })
+      fetch(request)
+      .then((res) => {
+         if(res.ok){
+             return res.json()
+         }
+         else{
+             return res.json().then(text => {throw new Error(text["ErrorMessage"]) })
+         }
+      })
+      .then((data) => {
+         resolve(data as GetList_output)
           })
       .catch((error) => {
           reject(error)

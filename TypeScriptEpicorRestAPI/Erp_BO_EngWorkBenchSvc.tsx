@@ -16038,6 +16038,11 @@ export interface Erp_Tablesets_ECOMtlRestrictionRow{
 }
 
 export interface Erp_Tablesets_ECOMtlRow{
+      /**  The identifier of related Process Manufacturing.  */  
+   "ProcessMfgID":string,
+   "RevisionNumPartDescription":string,
+   "RevisionNumRevDescription":string,
+   "RevisionNumRevShortDesc":string,
       /**  Company Identifier.  */  
    "Company":string,
       /**  Parent Part number to which this material item is a component of  */  
@@ -16177,8 +16182,6 @@ Mandatory, and must be a valid UOM of the Part's UOMClass.  */
    "SalvagePlanningAttributeSetID":number,
       /**  Planning Percent  */  
    "PlanningPct":number,
-      /**  The identifier of related Process Manufacturing.  */  
-   "ProcessMfgID":string,
       /**  Revision number which is used to uniquely identify the revision of the part.  */  
    "MtlRevisionNum":string,
       /**  Revision number which is used to uniquely identify the revision of the part.  */  
@@ -16262,9 +16265,6 @@ Mandatory, and must be a valid UOM of the Part's UOMClass.  */
    "PartNumTrackDimension":boolean,
    "PartNumPartDescription":string,
    "PartNumSellingFactor":number,
-   "RevisionNumPartDescription":string,
-   "RevisionNumRevDescription":string,
-   "RevisionNumRevShortDesc":string,
    "SalvagePartNumTrackInventoryByRevision":boolean,
    "SalvagePartNumPricePerCode":string,
    "SalvagePartNumSalesUM":string,
@@ -16340,6 +16340,8 @@ export interface Erp_Tablesets_ECOOpDtlRow{
    "SysRowID":string,
       /**  The identifier of related Process Manufacturing.  */  
    "ProcessMfgID":string,
+   "RevisionNumRevShortDesc":string,
+   "RevisionNumRevDescription":string,
       /**  Indicates if primary production operation.  */  
    "PrimaryProd":boolean,
       /**  Indicates if primary setup operation.  */  
@@ -16365,8 +16367,6 @@ export interface Erp_Tablesets_ECOOpDtlRow{
    "PartNumSalesUM":string,
    "PartNumIUM":string,
    "PartNumSellingFactor":number,
-   "RevisionNumRevShortDesc":string,
-   "RevisionNumRevDescription":string,
       /**  RowMod  */  
    "RowMod":string,
 }
@@ -16946,6 +16946,11 @@ secondary operation will scheduled to start after the offset period.  */
    "TemplateID":string,
       /**  Revision number which is used to uniquely identify the revision of the part.  */  
    "SubRevisionNum":string,
+   "PrimaryProdOpDtlOpDtlDesc":string,
+   "PrimarySetupOpDtlOpDtlDesc":string,
+   "RevisionNumRevShortDesc":string,
+   "RevisionNumRevDescription":string,
+   "RevisionNumPartDescription":string,
       /**  The vendor's name and bill to address  */  
    "DspBillAddr":string,
       /**  Field used to control the flag on SNRequiredSubConShip field on UI screens.  */  
@@ -16996,11 +17001,6 @@ secondary operation will scheduled to start after the offset period.  */
    "PartNumPricePerCode":string,
    "PartNumPartDescription":string,
    "PartNumSalesUM":string,
-   "PrimaryProdOpDtlOpDtlDesc":string,
-   "PrimarySetupOpDtlOpDtlDesc":string,
-   "RevisionNumRevShortDesc":string,
-   "RevisionNumRevDescription":string,
-   "RevisionNumPartDescription":string,
    "SetupGroupDescription":string,
    "StageNoDescription":string,
    "SubPartNumTrackInventoryAttributes":boolean,
@@ -17177,6 +17177,9 @@ This field is not directly maintainable. Instead it is set during operation main
    "UseAdvancedStaging":boolean,
       /**  Only Part Revisions marked as Connected Process Control (CPC) enable will be send to CPC.  */  
    "ECPCEnabled":boolean,
+   "PartRevCreatedBy":string,
+   "PartRevCreatedOn":string,
+   "PartRevApproved":boolean,
    "Configured":boolean,
       /**  Should the GetDetails menu options be enabled?  */  
    "EnableGetDetails":boolean,
@@ -17207,9 +17210,6 @@ This field is not directly maintainable. Instead it is set during operation main
    "PartNumSellingFactor":number,
    "PartNumTrackLots":boolean,
    "PartNumTypeCode":string,
-   "PartRevCreatedBy":string,
-   "PartRevCreatedOn":string,
-   "PartRevApproved":boolean,
    "PlantName":string,
       /**  RowMod  */  
    "RowMod":string,
@@ -19490,6 +19490,11 @@ Mandatory, and must be a valid UOM of the Part's UOMClass.  */
    RevisionNumPartDescription:string,
    RevisionNumRevDescription:string,
    RevisionNumRevShortDesc:string,
+   MtlPartNumAttrClassID:string,
+   MtlPartNumTrackInventoryAttributes:boolean,
+   EnableAttributeSetSearch:boolean,
+   DynAttrValueSetDescription:string,
+   DynAttrValueSetShortDescription:string,
       /**  The user's response to potential question for analysis code on mtlpartnum validation.  */  
    AnswerMtlPartNumQuestion:boolean,
       /**  Attrition Rate  */  
@@ -19536,7 +19541,6 @@ Mandatory, and must be a valid UOM of the Part's UOMClass.  */
    DspUnitMeasure:string,
       /**  External field used to control the flag over the FixedQty field on UI screens.  */  
    EnableFixedQty:boolean,
-   EnableAttributeSetSearch:boolean,
    SalvEnableAttSetSearch:boolean,
       /**  Number of pieces for inventory attribute tracked parts.  */  
    PlanningNumberOfPiecesDisp:number,
@@ -19545,12 +19549,8 @@ Mandatory, and must be a valid UOM of the Part's UOMClass.  */
    BitFlag:number,
    AnalysisCdDescription:string,
    APSSchedulerNameAPSSchedulerName:string,
-   DynAttrValueSetShortDescription:string,
-   DynAttrValueSetDescription:string,
    GroupIDDescription:string,
    MtlPartNumTrackInventoryByRevision:boolean,
-   MtlPartNumAttrClassID:string,
-   MtlPartNumTrackInventoryAttributes:boolean,
    MtlPartNumTrackLots:boolean,
    MtlPartNumTrackDimension:boolean,
    MtlPartNumSellingFactor:number,
@@ -20255,6 +20255,11 @@ secondary operation will scheduled to start after the offset period.  */
    RevisionNumRevShortDesc:string,
    RevisionNumRevDescription:string,
    RevisionNumPartDescription:string,
+   SubPartNumAttrClassID:string,
+   SubPartNumTrackInventoryAttributes:boolean,
+   EnableAttributeSetSearch:boolean,
+   DynAttrValueSetDescription:string,
+   DynAttrValueSetShortDescription:string,
       /**  The vendor's name and bill to address  */  
    DspBillAddr:string,
       /**  Field used to control the flag on SNRequiredSubConShip field on UI screens.  */  
@@ -20286,14 +20291,11 @@ secondary operation will scheduled to start after the offset period.  */
    UseStaging:boolean,
       /**  The auto receive field  */  
    AutoReceive:boolean,
-   EnableAttributeSetSearch:boolean,
    PrimaryProdOpDtlDesc:string,
    PrimarySetupOpDtlDesc:string,
    BitFlag:number,
    AnalysisCdDescription:string,
    APSSchedulerNameAPSSchedulerName:string,
-   DynAttrValueSetShortDescription:string,
-   DynAttrValueSetDescription:string,
    GroupIDDescription:string,
    OpCodeOpDesc:string,
    PartNumTrackInventoryByRevision:boolean,
@@ -20307,7 +20309,6 @@ secondary operation will scheduled to start after the offset period.  */
    PartNumSalesUM:string,
    SetupGroupDescription:string,
    StageNoDescription:string,
-   SubPartNumTrackInventoryAttributes:boolean,
    SubPartNumPricePerCode:string,
    SubPartNumTrackDimension:boolean,
    SubPartNumTrackSerialNum:boolean,
@@ -20316,7 +20317,6 @@ secondary operation will scheduled to start after the offset period.  */
    SubPartNumSalesUM:string,
    SubPartNumPartDescription:string,
    SubPartNumIUM:string,
-   SubPartNumAttrClassID:string,
    SubPartNumTrackInventoryByRevision:boolean,
    VendorNumDefaultFOB:string,
    VendorNumCurrencyCode:string,
@@ -20481,11 +20481,11 @@ This field is not directly maintainable. Instead it is set during operation main
    UseAdvancedStaging:boolean,
       /**  Only Part Revisions marked as Connected Process Control (CPC) enable will be send to CPC.  */  
    ECPCEnabled:boolean,
+   Configured:boolean,
+   CNCustomsBOM:boolean,
    PartRevCreatedBy:string,
    PartRevCreatedOn:string,
    PartRevApproved:boolean,
-   Configured:boolean,
-   CNCustomsBOM:boolean,
       /**  Should the GetDetails menu options be enabled?  */  
    EnableGetDetails:boolean,
       /**  Should the UnLock menu option be enabled?  */  
@@ -23700,7 +23700,7 @@ export interface UpdateCurrentECORev_input{
 export interface UpdateCurrentECORev_output{
 parameters : {
       /**  output parameters  */  
-   EngWorkBenchData: UNKNOW TYPE(error 2338),
+   EngWorkBenchData:any // UNKNOW TYPE(error 2338),
 }
 }
 
@@ -23728,7 +23728,7 @@ export interface UpdateECORev_input{
 export interface UpdateECORev_output{
 parameters : {
       /**  output parameters  */  
-   EngWorkBenchData: UNKNOW TYPE(error 2338),
+   EngWorkBenchData:any // UNKNOW TYPE(error 2338),
 }
 }
 

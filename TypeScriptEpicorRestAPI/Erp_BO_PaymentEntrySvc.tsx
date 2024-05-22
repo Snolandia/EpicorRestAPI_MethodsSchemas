@@ -12271,18 +12271,108 @@ CurrRate.CurrentRate. Conversion rates will be calculated as System Base = Forei
    Rpt3BankPaidAmt:number,
       /**  Bank Transaction Date  */  
    BankTransDate:string,
-      /**  PaymentNumber  */  
-   PaymentNumber:string,
       /**  Revision identifier for this row. It is incremented upon each write.  */  
    SysRevID:number,
       /**  Unique identifier for this row. The value is a GUID.  */  
    SysRowID:string,
+      /**  NOPaymentStatus  */  
+   NOPaymentStatus:number,
+      /**  MXRecDate  */  
+   MXRecDate:string,
+      /**  PayLegalNumber  */  
+   PayLegalNumber:string,
+      /**  LegalNumber  */  
+   LegalNumber:string,
+      /**  BankBatchSysRowID  */  
+   BankBatchSysRowID:string,
+      /**  THPayerType  */  
+   THPayerType:number,
+   VoidDate:string,
+   BaseCurrSymbol:string,
+      /**  Indicates if payment to a One-Time Vendor  */  
+   OneTimeVendor:boolean,
+   PaymentStatus:string,
+   PaymentAmount:number,
+      /**  To be used by UI for entry  */  
+   VendorID:string,
+      /**  Enable the Bank Account Search Button  */  
+   BankAccountEnabled:boolean,
+      /**  Invoice is considered as fully paid in case the absolute value of unapplied amout is less than tolerance defined for the currency, it's used to show the status of invoice.  */  
+   FullyPaid:boolean,
+      /**  Sum of all rounding differences of the payments for one Cash Receipt and one Check  */  
+   TotalRoundDiff:number,
+      /**  Bank Currency Code  */  
+   BankCurrCode:string,
+      /**  Payment Total can be entered manually  */  
+   EnterPaymentTotal:boolean,
+      /**  label <Payment Currency> -> <Bank Currency>  */  
+   XRateLabelPaymentBank:string,
+      /**  label <Payment Currency> --> <Base Currency>  */  
+   XRateLabelPaymentBase:string,
+   BankCurrSymbol:string,
+      /**  shows is this invoice is blocked in RvLock.  */  
+   IsLcked:boolean,
+      /**  Review Journal UID  */  
+   RvnJrnUID:number,
+      /**  locked means can not be posted: an invoice is already in review journal or in posting process.  */  
+   LockStatus:string,
+   ExchangeRateDisabled:boolean,
+   BaseExchRate:boolean,
+      /**  It is used for Apply Debit Memo Process  */  
+   DocUnappliedAmt:number,
+      /**  It is used for Apply Debit Memo Process  */  
+   UnappliedAmt:number,
+      /**  It is used for Apply Debit Memo Process  */  
+   Rpt1UnappliedAmt:number,
+      /**  It is used for Apply Debit Memo Process  */  
+   Rpt2UnappliedAmt:number,
+      /**  It is used for Apply Debit Memo Process  */  
+   Rpt3UnappliedAmt:number,
+      /**  It is used for Apply Debit Memo Process  */  
+   InvType:string,
+      /**  DocUnpostedBal of Debit Memo or Pre-Payment Invoice.  */  
+   DocUnpostedBal:number,
+   HasLines:boolean,
+   BaseCurrencyCode:string,
+   EnableCurrency:boolean,
+   EnableIsEnterTotal:boolean,
+   BankAcctIDBankName:string,
+   BankAcctIDDescription:string,
+   BaseCurrSymbolDocumentDesc:string,
+   BaseCurrSymbolCurrencyID:string,
+   BaseCurrSymbolCurrName:string,
+   BaseCurrSymbolCurrSymbol:string,
+   BaseCurrSymbolCurrDesc:string,
+   CashbookLineDescription:string,
+   CountryNumDescription:string,
+   CurrencyCodeCurrName:string,
+   CurrencyCodeCurrDesc:string,
+   CurrencyCodeCurrSymbol:string,
+   CurrencyCodeCurrencyID:string,
+   CurrencyCodeDocumentDesc:string,
+   VendorBankCountryNumDescription:string,
+   VendorNumAddress2:string,
+   VendorNumCountry:string,
+   VendorNumName:string,
+   VendorNumVendorID:string,
+   VendorNumAddress3:string,
+   VendorNumCurrencyCode:string,
+   VendorNumState:string,
+   VendorNumZIP:string,
+   VendorNumAddress1:string,
+   VendorNumCity:string,
+   VendorNumDefaultFOB:string,
+   VendorNumTermsCode:string,
+      /**  CSF Switzerland - Indicate that Check has urgent Invoice payment  */  
+   UrgentCheck:boolean,
+      /**  RowMod  */  
+   RowMod:string,
+      /**  PaymentNumber  */  
+   PaymentNumber:string,
       /**  VendorBankIBANCode  */  
    VendorBankIBANCode:string,
       /**  OwnReference  */  
    OwnReference:string,
-      /**  NOPaymentStatus  */  
-   NOPaymentStatus:number,
       /**  NOPaymentDirection  */  
    NOPaymentDirection:string,
       /**  NOPaymentType  */  
@@ -12303,10 +12393,6 @@ CurrRate.CurrentRate. Conversion rates will be calculated as System Base = Forei
    DocBankRecGainLoss:number,
       /**  MsgId  */  
    MsgId:string,
-      /**  MXRecDate  */  
-   MXRecDate:string,
-      /**  PayLegalNumber  */  
-   PayLegalNumber:string,
       /**  PayTranDocTypeID  */  
    PayTranDocTypeID:string,
       /**  Rpt1BankRecGainLoss  */  
@@ -12329,8 +12415,6 @@ CurrRate.CurrentRate. Conversion rates will be calculated as System Base = Forei
    SEISGroupedPO3:boolean,
       /**  SEISExported  */  
    SEISExported:boolean,
-      /**  LegalNumber  */  
-   LegalNumber:string,
       /**  TranDocTypeID  */  
    TranDocTypeID:string,
       /**  MXBankAcctNumber  */  
@@ -12341,8 +12425,6 @@ CurrRate.CurrentRate. Conversion rates will be calculated as System Base = Forei
    MXRFC:string,
       /**  Indicates that payment is currently excluded from batch in Bank Statement Processing.  */  
    BankBatchExcluded:boolean,
-      /**  BankBatchSysRowID  */  
-   BankBatchSysRowID:string,
       /**  ChangedBy  */  
    ChangedBy:string,
       /**  ChangeDate  */  
@@ -12351,8 +12433,6 @@ CurrRate.CurrentRate. Conversion rates will be calculated as System Base = Forei
    ABTUID:string,
       /**  SEPAPaymentDescription  */  
    SEPAPaymentDescription:string,
-      /**  THPayerType  */  
-   THPayerType:number,
       /**  TH Reference Invoice Num  */  
    THRefInvoiceNum:string,
       /**  TH Reference Vendor Num  */  
@@ -12390,93 +12470,42 @@ CurrRate.CurrentRate. Conversion rates will be calculated as System Base = Forei
    BankBatchIDDsp:string,
       /**  Bank Check Amount  */  
    BankCheckAmt:number,
-      /**  Bank Currency Code  */  
-   BankCurrCode:string,
-   BankCurrSymbol:string,
-   BaseCurrencyCode:string,
-   BaseCurrSymbol:string,
-   BaseExchRate:boolean,
       /**   The flag to indicate if BankClearedAmt is not available to make changes.
 (If Bank currency equals transaction currency this flag is true)  */  
    DisableBankAmt:boolean,
       /**  The total amount of tax related to Prepayment Invoice availabe for reverse in document currency.  */  
    DocPreTaxTotal:number,
-      /**  It is used for Apply Debit Memo Process  */  
-   DocUnappliedAmt:number,
-      /**  DocUnpostedBal of Debit Memo or Pre-Payment Invoice.  */  
-   DocUnpostedBal:number,
       /**  Withholding taxes calcullated on applying Debit Memo in document currency  */  
    DocWhldTotal:number,
    EnableAssignLN:boolean,
-   EnableCurrency:boolean,
-   EnableIsEnterTotal:boolean,
    EnableTranDocTypeID:boolean,
    EnableVoidLN:boolean,
-      /**  Payment Total can be entered manually  */  
-   EnterPaymentTotal:boolean,
-   ExchangeRateDisabled:boolean,
       /**  If Payment is created from Bank Reconcilation  */  
    FromBankRec:boolean,
-      /**  Invoice is considered as fully paid in case the absolute value of unapplied amout is less than tolerance defined for the currency, it's used to show the status of invoice.  */  
-   FullyPaid:boolean,
-   HasLines:boolean,
-      /**  It is used for Apply Debit Memo Process  */  
-   InvType:string,
-      /**  shows is this invoice is blocked in RvLock.  */  
-   IsLcked:boolean,
    LegalNumberMessage:string,
-      /**  locked means can not be posted: an invoice is already in review journal or in posting process.  */  
-   LockStatus:string,
       /**  Indicates if the Payment (check) date was chagned by the user.  */  
    ManualDateChange:boolean,
       /**  Indicates if Exchange rate was manually changed by the user.  */  
    ManualExRateChange:boolean,
-      /**  Indicates if payment to a One-Time Vendor  */  
-   OneTimeVendor:boolean,
-   PaymentAmount:number,
-   PaymentStatus:string,
    PCReceipt:boolean,
       /**  The total amount of tax related to Prepayment Invoice availabe for reverse in base currency.  */  
    PreTaxTotal:number,
       /**  The total amount of tax related to Prepayment Invoice availabe for reverse in Rpt1 currency.  */  
    Rpt1PreTaxTotal:number,
-      /**  It is used for Apply Debit Memo Process  */  
-   Rpt1UnappliedAmt:number,
       /**  Withholding taxes calcullated on applying Debit Memo in Rpt1 currency  */  
    Rpt1WhldTotal:number,
       /**  The total amount of tax related to Prepayment Invoice availabe for reverse in Rpt2 currency.  */  
    Rpt2PreTaxTotal:number,
-      /**  It is used for Apply Debit Memo Process  */  
-   Rpt2UnappliedAmt:number,
       /**  Withholding taxes calcullated on applying Debit Memo in Rpt2 currency  */  
    Rpt2WhldTotal:number,
       /**  The total amount of tax related to Prepayment Invoice availabe for reverse in Rpt3 currency  */  
    Rpt3PreTaxTotal:number,
-      /**  It is used for Apply Debit Memo Process  */  
-   Rpt3UnappliedAmt:number,
       /**  Withholding taxes calcullated on applying Debit Memo in Rpt3t currency  */  
    Rpt3WhldTotal:number,
-      /**  Review Journal UID  */  
-   RvnJrnUID:number,
    SelectedForAction:boolean,
    SEPAPaymentDescriptionEnabled:boolean,
-      /**  Sum of all rounding differences of the payments for one Cash Receipt and one Check  */  
-   TotalRoundDiff:number,
-      /**  It is used for Apply Debit Memo Process  */  
-   UnappliedAmt:number,
-      /**  CSF Switzerland - Indicate that Check has urgent Invoice payment  */  
-   UrgentCheck:boolean,
-      /**  To be used by UI for entry  */  
-   VendorID:string,
-   VoidDate:string,
       /**  Withholding taxes calcullated on applying Debit Memo in base currency  */  
    WhldTotal:number,
-      /**  label <Payment Currency> -> <Bank Currency>  */  
-   XRateLabelPaymentBank:string,
-      /**  label <Payment Currency> --> <Base Currency>  */  
-   XRateLabelPaymentBase:string,
-      /**  Enable the Bank Account Search Button  */  
-   BankAccountEnabled:boolean,
       /**  Full address of Voided Payment  */  
    FullAddress:string,
       /**  Check Misc Amount. Base Currency.  */  
@@ -12500,41 +12529,12 @@ CurrRate.CurrentRate. Conversion rates will be calculated as System Base = Forei
       /**  Reporting currency value of this field  */  
    Rpt3CheckInvAmt:number,
    BitFlag:number,
-   BankAcctIDDescription:string,
-   BankAcctIDBankName:string,
    BankBranchBankBranchCode:string,
    BankBranchDescription:string,
-   BaseCurrSymbolCurrDesc:string,
-   BaseCurrSymbolCurrName:string,
-   BaseCurrSymbolCurrSymbol:string,
-   BaseCurrSymbolCurrencyID:string,
-   BaseCurrSymbolDocumentDesc:string,
-   CashbookLineDescription:string,
-   CountryNumDescription:string,
-   CurrencyCodeCurrencyID:string,
-   CurrencyCodeDocumentDesc:string,
-   CurrencyCodeCurrDesc:string,
-   CurrencyCodeCurrSymbol:string,
-   CurrencyCodeCurrName:string,
    PMUIDName:string,
    THRefVendorNumName:string,
    THRefVendorNumVendorID:string,
-   VendorBankCountryNumDescription:string,
-   VendorNumCurrencyCode:string,
-   VendorNumName:string,
-   VendorNumAddress3:string,
-   VendorNumAddress1:string,
-   VendorNumVendorID:string,
-   VendorNumAddress2:string,
-   VendorNumTermsCode:string,
-   VendorNumCountry:string,
-   VendorNumState:string,
-   VendorNumCity:string,
-   VendorNumZIP:string,
-   VendorNumDefaultFOB:string,
    XbSystSiteIsLegalEntity:boolean,
-      /**  RowMod  */  
-   RowMod:string,
 }
 
 export interface Erp_Tablesets_LegalNumGenOptsRow{

@@ -2726,14 +2726,29 @@ export interface Erp_Tablesets_MassIssueInputListTableset{
 }
 
 export interface Erp_Tablesets_MassIssueInputRow{
-      /**  Transaction Date  */  
-   TranDate:string,
+      /**  Company indentifier  */  
+   Company:string,
       /**  Job Number  */  
    JobNum:string,
-      /**  Job type  */  
-   JobType:string,
       /**  Assembly Sequence  */  
    AssemblySeq:number,
+   PartNum:string,
+   Description:string,
+      /**  Optional field that contains the customers revision. Default from the PartRev.RevisionNum  */  
+   RevisionNum:string,
+   IUM:string,
+   RequiredQty:number,
+      /**  Call Number  */  
+   CallNum:number,
+      /**  Call Line  */  
+   CallLine:number,
+   SysRowID:string,
+      /**  The unique identifier of the related Dynamic Attribute Set.  */  
+   AttributeSetID:number,
+      /**  Transaction Date  */  
+   TranDate:string,
+      /**  Job type  */  
+   JobType:string,
       /**  Include Sub assemblies  */  
    IncludeSubassemblies:boolean,
       /**  Include Subassemblies' overrun quantity  */  
@@ -2742,42 +2757,27 @@ export interface Erp_Tablesets_MassIssueInputRow{
    PartNumJH:string,
       /**  Part Jobhead description  */  
    PartDescJH:string,
-      /**  Call Number  */  
-   CallNum:number,
-      /**  Call Line  */  
-   CallLine:number,
       /**  Part Number Assembly  */  
    PartNumAsm:string,
       /**  Part Assembly description  */  
    PartDescAsm:string,
-      /**  Company indentifier  */  
-   Company:string,
    JobDescJH:string,
-   IUM:string,
    AssemblyQty:number,
       /**  Dummy key field.  It is the primary key of the dataset  */  
    dummyKeyfield:string,
    FSCallhdInvoiced:boolean,
-   RequiredQty:number,
       /**  Set to true if the user chooses Include Subassembly and the record is part of the parent assembly  */  
    ReadOnly:boolean,
-   PartNum:string,
-   Description:string,
       /**  Return from Mfg  */  
    IsReturn:boolean,
       /**  The Full Description of the Attribute Set.  */  
    AttributeSetDescription:string,
-      /**  The unique identifier of the related Dynamic Attribute Set.  */  
-   AttributeSetID:number,
       /**  The Short Description of the Attribute Set.  */  
    AttributeSetShortDescription:string,
-      /**  Optional field that contains the customers revision. Default from the PartRev.RevisionNum  */  
-   RevisionNum:string,
       /**  Optional field that contains the customers revision. Default from the PartRev.RevisionNum  */  
    RevisionNumAsm:string,
       /**  Optional field that contains the customers revision. Default from the PartRev.RevisionNum  */  
    RevisionNumJH:string,
-   SysRowID:string,
    PartTrackInventoryByRevision:boolean,
    PartSalesUM:string,
    PartTrackLots:boolean,
@@ -3555,7 +3555,7 @@ export interface PrePerformMassIssueHT_output{
 parameters : {
       /**  output parameters  */  
    ds:Erp_Tablesets_MassIssueToMfgTableset,
-   htPrePerform: UNKNOW TYPE(error 2338),
+   htPrePerform:any // UNKNOW TYPE(error 2338),
 }
 }
 

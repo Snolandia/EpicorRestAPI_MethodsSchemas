@@ -4052,6 +4052,8 @@ export interface Erp_Tablesets_ReqDetailAttchRow{
 }
 
 export interface Erp_Tablesets_ReqDetailRow{
+      /**  Related to Epicor FSA  */  
+   EpicorFSA:boolean,
       /**  Company Identifier.  */  
    Company:string,
       /**  Indicates if this line item is Open/Closed. This is not directly maintainable by the user.  This is a mirror of ReqHead.OpenReq and is used for performance reasons.  */  
@@ -4151,8 +4153,6 @@ FYI: This field can indirectly sets the TranType field via the write trigger. It
    SysRowID:string,
       /**  Indicates if the supplier price list has been overriden which will in turn prevent the unit price from being updated when taking into account quantity / price breaks.  */  
    OverridePriceList:boolean,
-      /**  Related to Epicor FSA  */  
-   EpicorFSA:boolean,
       /**  The unique identifier of the related Dynamic Attribute Set.  */  
    AttributeSetID:number,
       /**  Number of pieces for this attribute set.  */  
@@ -4270,6 +4270,8 @@ export interface Erp_Tablesets_ReqHeadListTableset{
 }
 
 export interface Erp_Tablesets_ReqHeadRow{
+      /**  Revision identifier for this row. It is incremented upon each write.  */  
+   SysRevID:number,
       /**  Company Identifier.  */  
    Company:string,
       /**  Indicates if the requisition is open or closed.  This is set automatically when all the ReqDetail records have been closed or can be set if the user Voids the Requisition.  This field is not directly maintainable.  */  
@@ -4320,8 +4322,6 @@ export interface Erp_Tablesets_ReqHeadRow{
    GlbReqNum:number,
       /**  Used in Consolidated Purchasing  */  
    CPDispatcherID:string,
-      /**  Revision identifier for this row. It is incremented upon each write.  */  
-   SysRevID:number,
       /**  Unique identifier for this row. The value is a GUID.  */  
    SysRowID:string,
       /**  CreatedBy  */  

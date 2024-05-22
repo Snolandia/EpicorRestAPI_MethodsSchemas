@@ -1644,7 +1644,7 @@ export interface GetLicensedModuleAccess_output{
 export interface GetModuleAccess_output{
 parameters : {
       /**  output parameters  */  
-   moduleAccessList: UNKNOW TYPE(error 2338),
+   moduleAccessList:any // UNKNOW TYPE(error 2338),
 }
 }
 

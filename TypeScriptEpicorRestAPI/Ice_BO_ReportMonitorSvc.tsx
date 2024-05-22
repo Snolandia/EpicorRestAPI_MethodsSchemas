@@ -1611,7 +1611,7 @@ export interface GetRowsKeepIdleTimeWithBallonInfo_output{
    returnObj:Ice_Tablesets_ReportMonitorTableset[],
 parameters : {
       /**  output parameters  */  
-   sysMonitorData: UNKNOW TYPE(error 2338),
+   sysMonitorData:any // UNKNOW TYPE(error 2338),
 }
 }
 

@@ -3671,7 +3671,7 @@ export interface ReadBackupSettingsFromFile_input{
 export interface ReadBackupSettingsFromFile_output{
 parameters : {
       /**  output parameters  */  
-   ds: UNKNOW TYPE(error 2338),
+   ds:any // UNKNOW TYPE(error 2338),
 }
 }
 

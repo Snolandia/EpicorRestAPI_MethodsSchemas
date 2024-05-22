@@ -2444,7 +2444,7 @@ export interface OnChangingNumberOfPieces_input{
 export interface OnChangingNumberOfPieces_output{
 parameters : {
       /**  output parameters  */  
-   ds: UNKNOW TYPE(error 2338),
+   ds:any // UNKNOW TYPE(error 2338),
 }
 }
 
@@ -2462,7 +2462,7 @@ export interface OnChangingSelectedForActionQty_input{
 export interface OnChangingSelectedForActionQty_output{
 parameters : {
       /**  output parameters  */  
-   ds: UNKNOW TYPE(error 2338),
+   ds:any // UNKNOW TYPE(error 2338),
 }
 }
 

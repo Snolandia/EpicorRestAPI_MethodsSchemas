@@ -3958,7 +3958,7 @@ export interface GetDefaultsFromSelectedTemplate_input{
 export interface GetDefaultsFromSelectedTemplate_output{
 parameters : {
       /**  output parameters  */  
-   dynAttrValueDS: UNKNOW TYPE(error 2338),
+   dynAttrValueDS:any // UNKNOW TYPE(error 2338),
 }
 }
 
@@ -4040,7 +4040,7 @@ export interface GetInventoryDynAttrValueParams_output{
 parameters : {
       /**  output parameters  */  
    inventoryDynAttrValueParamsTS:Erp_Tablesets_InventoryDynAttrValueParamsTableset,
-   inventoryDynAttrValueDS: UNKNOW TYPE(error 2338),
+   inventoryDynAttrValueDS:any // UNKNOW TYPE(error 2338),
 }
 }
 
@@ -4079,7 +4079,7 @@ export interface GetNewAttributeValuesRowWithOutDynamicMetaDataDS_output{
 parameters : {
       /**  output parameters  */  
    inventoryDynAttrValueParamsTS:Erp_Tablesets_InventoryDynAttrValueParamsTableset,
-   inventoryDynAttrValueDS: UNKNOW TYPE(error 2338),
+   inventoryDynAttrValueDS:any // UNKNOW TYPE(error 2338),
 }
 }
 
@@ -4096,7 +4096,7 @@ export interface GetNewAttributeValuesRow_output{
 parameters : {
       /**  output parameters  */  
    inventoryDynAttrValueParamsTS:Erp_Tablesets_InventoryDynAttrValueParamsTableset,
-   inventoryDynAttrValueDS: UNKNOW TYPE(error 2338),
+   inventoryDynAttrValueDS:any // UNKNOW TYPE(error 2338),
    dynamicMetadataDS:Erp_Tablesets_DynamicMetadataTableset,
 }
 }
@@ -4115,7 +4115,7 @@ export interface GetNewDynAttrValueSetDataSet_input{
 export interface GetNewDynAttrValueSetDataSet_output{
 parameters : {
       /**  output parameters  */  
-   ds: UNKNOW TYPE(error 2338),
+   ds:any // UNKNOW TYPE(error 2338),
    dynamicMetadataDS:Erp_Tablesets_DynamicMetadataTableset,
 }
 }
@@ -4226,7 +4226,7 @@ export interface GetNewInventoryDynAttrValuesRow_input{
 export interface GetNewInventoryDynAttrValuesRow_output{
 parameters : {
       /**  output parameters  */  
-   inventoryDynAttrValueDS: UNKNOW TYPE(error 2338),
+   inventoryDynAttrValueDS:any // UNKNOW TYPE(error 2338),
    dynamicMetadataDS:Erp_Tablesets_DynamicMetadataTableset,
 }
 }
@@ -4354,7 +4354,7 @@ export interface OnChangeAttributeValuesColumnObject_input{
 export interface OnChangeAttributeValuesColumnObject_output{
 parameters : {
       /**  output parameters  */  
-   modifiedDynAttrValueDS: UNKNOW TYPE(error 2338),
+   modifiedDynAttrValueDS:any // UNKNOW TYPE(error 2338),
 }
 }
 
@@ -4372,7 +4372,7 @@ export interface OnChangeDynAttrValueColumn_input{
 export interface OnChangeDynAttrValueColumn_output{
 parameters : {
       /**  output parameters  */  
-   modifiedDynAttrValueDS: UNKNOW TYPE(error 2338),
+   modifiedDynAttrValueDS:any // UNKNOW TYPE(error 2338),
 }
 }
 
@@ -4392,7 +4392,7 @@ export interface OnChangeDynAttrValueSetColumnObject_input{
 export interface OnChangeDynAttrValueSetColumnObject_output{
 parameters : {
       /**  output parameters  */  
-   modifiedDynAttrValueDS: UNKNOW TYPE(error 2338),
+   modifiedDynAttrValueDS:any // UNKNOW TYPE(error 2338),
 }
 }
 
@@ -4406,7 +4406,7 @@ export interface RefreshDynAttrValuesRow_input{
 export interface RefreshDynAttrValuesRow_output{
 parameters : {
       /**  output parameters  */  
-   dynAttrValueDS: UNKNOW TYPE(error 2338),
+   dynAttrValueDS:any // UNKNOW TYPE(error 2338),
 }
 }
 
@@ -4429,7 +4429,7 @@ export interface UpdateAttributeValuesObject_output{
 parameters : {
       /**  output parameters  */  
    inventoryDynAttrValueParamsTS:Erp_Tablesets_InventoryDynAttrValueParamsTableset,
-   dynAttrValueDS: UNKNOW TYPE(error 2338),
+   dynAttrValueDS:any // UNKNOW TYPE(error 2338),
 }
 }
 
@@ -4450,7 +4450,7 @@ export interface UpdateAttributeValues_output{
 parameters : {
       /**  output parameters  */  
    inventoryDynAttrValueParamsTS:Erp_Tablesets_InventoryDynAttrValueParamsTableset,
-   dynAttrValueDS: UNKNOW TYPE(error 2338),
+   dynAttrValueDS:any // UNKNOW TYPE(error 2338),
 }
 }
 
@@ -4466,7 +4466,7 @@ export interface UpdateDynAttrValueSetDataSetObject_input{
 export interface UpdateDynAttrValueSetDataSetObject_output{
 parameters : {
       /**  output parameters  */  
-   ds: UNKNOW TYPE(error 2338),
+   ds:any // UNKNOW TYPE(error 2338),
 }
 }
 
@@ -4480,7 +4480,7 @@ export interface UpdateDynAttrValueSetDataSet_input{
 export interface UpdateDynAttrValueSetDataSet_output{
 parameters : {
       /**  output parameters  */  
-   ds: UNKNOW TYPE(error 2338),
+   ds:any // UNKNOW TYPE(error 2338),
 }
 }
 
@@ -4539,7 +4539,7 @@ export interface UpdateInventoryAttributes_output{
 parameters : {
       /**  output parameters  */  
    inventoryDynAttrValueParamsTS:Erp_Tablesets_InventoryDynAttrValueParamsTableset,
-   updatedDynAttrValueDS: UNKNOW TYPE(error 2338),
+   updatedDynAttrValueDS:any // UNKNOW TYPE(error 2338),
 }
 }
 
